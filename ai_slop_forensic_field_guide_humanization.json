@@ -1,0 +1,754 @@
+{
+  "title": "The AI Slop Forensic Field Guide - Compact LLM Synthesis Schema",
+  "description": "A compact, structured forensic index of all known AI text tells, tropes, and patterns, optimized for direct LLM ingestion, detection, and humanization.",
+  "compiled_date": "2026-09-17",
+  "total_slop_items": 43,
+  "last_updated": "2026-09-29 (added rhetorical_relativizer_omission and structure_missing_transitional_phrases)",
+  "slop_items": [
+    {
+      "id": "artifact_chat_wrapper_leakage",
+      "slop_item": "Chat Wrapper Leakage",
+      "category": "Artifacts and Residue (Smoking Guns)",
+      "confidence_level": "Smoking gun 🔴",
+      "explanation": "Language models instruction-tuned as conversational assistants absorb conversational politeness wrappers, conversational bookends, and prompt responses. When users copy-paste output without editing, these conversational wrappers leak into standalone documents, emails, and articles.",
+      "examples": [
+        "Certainly! Here is a blog post about artificial intelligence...",
+        "I hope this helps! Let me know if you would like me to adjust the tone or expand on any section.",
+        "You're absolutely right! That's an excellent point."
+      ],
+      "humanized_versions": [
+        "[Omit entirely; open immediately with the article headline or first paragraph]",
+        "[Omit sign-off; end with a direct factual conclusion, specific call to action, or simple period]",
+        "That matches our data on regional sales performance."
+      ]
+    },
+    {
+      "id": "artifact_knowledge_cutoff_disclaimers",
+      "slop_item": "Knowledge-Cutoff and Source-Gap Disclaimers",
+      "category": "Artifacts and Residue (Smoking Guns)",
+      "confidence_level": "Smoking gun 🔴",
+      "explanation": "Models hedge around time boundaries or missing contextual details by generating system-level disclaimers about training dates or available source materials. These hedges betray machine origin when appearing in static reports or published text.",
+      "examples": [
+        "As of my last training update in 2024, exact figures were unavailable.",
+        "While specific details are limited in available sources, it appears that the company continues to operate.",
+        "Based on available information, it is likely that the policy remains in effect."
+      ],
+      "humanized_versions": [
+        "As of Q3 2024, the department reported 14,000 active subscriptions.",
+        "The company operated three distribution hubs before restructuring in 2023.",
+        "The 2022 policy mandate remains active across all municipal districts."
+      ]
+    },
+    {
+      "id": "artifact_placeholder_template_residue",
+      "slop_item": "Placeholder and Template Residue",
+      "category": "Artifacts and Residue (Smoking Guns)",
+      "confidence_level": "Smoking gun 🔴",
+      "explanation": "LLMs output generalized template slots expecting human user input (such as brackets or capitalized field names). Leaving these unedited in sent emails or published pieces is a clear artifact of unreviewed copy-pasting.",
+      "examples": [
+        "Dear [Hiring Manager Name], I am writing to express my interest...",
+        "Our solution increases efficiency by [insert statistic]% across all departments.",
+        "Sincerely, [Your Name], [Your Title]"
+      ],
+      "humanized_versions": [
+        "Dear Ms. Davis,",
+        "Our solution increased processing throughput by 28% across the logistics team.",
+        "Sincerely, Marcus Vance, Lead Systems Engineer"
+      ]
+    },
+    {
+      "id": "artifact_leaked_citation_rendering_markup",
+      "slop_item": "Leaked Citation and Rendering Markup",
+      "category": "Artifacts and Residue (Smoking Guns)",
+      "confidence_level": "Smoking gun 🔴",
+      "explanation": "Internal UI tags, citation index chips, and search syntax from AI platforms (like OpenAI, Gemini, Grok, or Perplexity) frequently leak into raw text outputs when users copy formatted text from chat interfaces.",
+      "examples": [
+        "According to recent market analysis oaicite{...} turn0search0, renewable energy adoption surged.",
+        "The study highlights significant gains in battery density [cite: 1] [span_1](start_span).",
+        "Key findings confirm efficiency gains 【1†source】 grok_card_render."
+      ],
+      "humanized_versions": [
+        "According to recent market analysis by BloombergNEF, renewable energy adoption surged.",
+        "The study in Energy Storage Journal highlights a 14% gain in battery density.",
+        "Key findings from the 2025 NREL report confirm efficiency gains."
+      ]
+    },
+    {
+      "id": "artifact_tracking_parameters",
+      "slop_item": "Tracking Parameters in Hyperlinks",
+      "category": "Artifacts and Residue (Smoking Guns)",
+      "confidence_level": "Smoking gun 🔴",
+      "explanation": "Search-enabled language models automatically append platform-specific tracking parameters (such as ?utm_source=chatgpt.com) when fetching web links. Re-publishing these links exposes machine generation.",
+      "examples": [
+        "For further details, see the official documentation at https://docs.example.com/api?utm_source=chatgpt.com",
+        "Refer to the original study on https://journal.org/article-123?utm_source=chatgpt.com",
+        "Learn more on https://newssite.com/tech-update?utm_source=chatgpt.com"
+      ],
+      "humanized_versions": [
+        "For further details, see the official documentation at https://docs.example.com/api",
+        "Refer to the original study in the Journal of Systems Architecture (https://journal.org/article-123)",
+        "Learn more at https://newssite.com/tech-update"
+      ]
+    },
+    {
+      "id": "artifact_raw_markdown_in_plain_text",
+      "slop_item": "Markdown Formatting in Plain-Text Contexts",
+      "category": "Artifacts and Residue (Smoking Guns)",
+      "confidence_level": "Smoking gun 🔴",
+      "explanation": "LLMs output Markdown formatting (bold asterisks, raw header hashes, bullet dashes) by default. When pasted into plain-text inputs, emails, Word docs, or wikis that do not parse Markdown, the raw formatting syntax displays as visual noise.",
+      "examples": [
+        "## Project Overview\nWe must focus on **three primary goals**:",
+        "- **Scalability:** The infrastructure scales automatically.",
+        "### Key Takeaways\n- First point\n- Second point"
+      ],
+      "humanized_versions": [
+        "Project Overview\nWe must focus on three primary goals:",
+        "Scalability: The infrastructure scales automatically.",
+        "Key Takeaways\n1. First point\n2. Second point"
+      ]
+    },
+    {
+      "id": "artifact_hallucinated_citations",
+      "slop_item": "Hallucinated Structure and Bibliographic References",
+      "category": "Artifacts and Residue (Smoking Guns)",
+      "confidence_level": "Smoking gun 🔴",
+      "explanation": "To satisfy academic or professional requests for authority, models synthesize plausible-sounding references, DOIs, journal volumes, or expert quotes that do not exist in reality. Crossref DOI resolution failures are a definitive proof of fabrication.",
+      "examples": [
+        "Dr. Sarah Johnson of Harvard University (2024) demonstrated a 40% reduction in latency (doi:10.1016/j.jss.2024.102938).",
+        "As noted in the Journal of Advanced AI Engineering, Vol 42, pp. 112-128...",
+        "A study by Smith & Roberts (2023) in Nature Computational Science confirmed this hypothesis."
+      ],
+      "humanized_versions": [
+        "A 2024 benchmarks report by the MIT Computer Science Lab measured a 40% reduction in latency.",
+        "As published in IEEE Software (Vol 39, No. 2)...",
+        "Research by Miller et al. (2023) at Stanford measured similar performance trends."
+      ]
+    },
+    {
+      "id": "artifact_refusal_text_leakage",
+      "slop_item": "Refusal Text Leakage",
+      "category": "Artifacts and Residue (Smoking Guns)",
+      "confidence_level": "Smoking gun 🔴",
+      "explanation": "Safety alignment guardrails trigger partial safety refusals that get accidentally pasted into product listings, social posts, or reviews alongside legitimate text.",
+      "examples": [
+        "I'm sorry, but I cannot fulfill this request as it violates OpenAI's use policy.",
+        "As an AI language model, I am unable to generate content that reviews specific individuals.",
+        "This item is a great choice! Note: I cannot assist with requests involving restricted materials."
+      ],
+      "humanized_versions": [
+        "[Delete refusing sentence completely]",
+        "[Write a genuine, specific human review based on firsthand usage]",
+        "This leather jacket fits true to size and features reinforced double-stitching."
+      ]
+    },
+    {
+      "id": "lexical_tier1_overused_vocabulary",
+      "slop_item": "Tier 1 High-Frequency Slop Vocabulary",
+      "category": "Lexical Tells (Vocabulary Layer)",
+      "confidence_level": "Strong 🟠",
+      "explanation": "Specific elevated vocabulary spiked drastically across academic and corporate text post-ChatGPT (e.g., 'delve' surged over 600–1500%). LLMs gravitate toward these safe, formal, high-probability terms to sound intelligent, rendering them immediate red flags.",
+      "examples": [
+        "This study delves into the rich tapestry of renewable energy frameworks.",
+        "The project stands as a testament to meticulous planning and multifaceted collaboration.",
+        "We must elucidate these intricate mechanisms to unleash the true power of the platform."
+      ],
+      "humanized_versions": [
+        "This study examines renewable energy policy across six European states.",
+        "The project succeeded due to thorough planning and coordination across four teams.",
+        "We need to explain these mechanisms so developers can configure the system properly."
+      ]
+    },
+    {
+      "id": "lexical_tier2_corporate_buzzwords",
+      "slop_item": "Tier 2 Overused Buzzwords and Metaphors",
+      "category": "Lexical Tells (Vocabulary Layer)",
+      "confidence_level": "Weak alone / Strong in cluster 🟡",
+      "explanation": "Corporate fluff words and metaphorical abstractions ('landscape', 'realm', 'ecosystem', 'foster', 'seamless') are overused by models to create artificial gravity and polish without offering specific technical details.",
+      "examples": [
+        "Navigating the ever-evolving digital landscape requires robust and scalable solutions.",
+        "Our innovative platform seamlessly empowers stakeholders to foster collaboration.",
+        "To unlock your full potential, you must cultivate a dynamic mindset in today's fast-paced world."
+      ],
+      "humanized_versions": [
+        "Adapting to changing software standards requires flexible, well-tested code.",
+        "Our software lets engineering and product teams share status updates directly.",
+        "To improve output, set daily priorities and focus on one task at a time."
+      ]
+    },
+    {
+      "id": "lexical_copula_avoidance",
+      "slop_item": "Copula Avoidance",
+      "category": "Lexical Tells (Vocabulary Layer)",
+      "confidence_level": "Strong 🟠",
+      "explanation": "LLMs habitually dodge simple linking verbs ('is', 'has', 'are') in favor of dramatic posture verbs ('serves as', 'functions as', 'stands as', 'acts as', 'marks a pivotal moment') to artificially inflate significance.",
+      "examples": [
+        "The gateway serves as a vital bridge between legacy systems and modern cloud infrastructure.",
+        "This update stands as a cornerstone of our security strategy.",
+        "The newly built facility operates as a hub for regional innovation."
+      ],
+      "humanized_versions": [
+        "The gateway connects legacy systems to cloud infrastructure.",
+        "This update is central to our security strategy.",
+        "The new facility is the regional office for engineering teams."
+      ]
+    },
+    {
+      "id": "lexical_zero_information_fillers",
+      "slop_item": "Zero-Information Filler Phrases",
+      "category": "Lexical Tells (Vocabulary Layer)",
+      "confidence_level": "Strong 🟠",
+      "explanation": "Throat-clearing openers and introductory transition phrases add word count and conversational pacing without carrying any information or factual substance.",
+      "examples": [
+        "It's worth noting that, as we navigate the complexities of modern engineering, security matters.",
+        "At its core, in today's fast-paced digital age, communication is essential.",
+        "Without further ado, let's dive into exploring the intricacies of this topic."
+      ],
+      "humanized_versions": [
+        "Security is essential in modern software engineering.",
+        "Clear communication prevents project delays.",
+        "Here are the benchmark results for the new database driver."
+      ]
+    },
+    {
+      "id": "lexical_authenticity_proxies",
+      "slop_item": "Authenticity Proxies ('Real' and 'Genuine')",
+      "category": "Lexical Tells (Vocabulary Layer)",
+      "confidence_level": "Weak alone / Strong in cluster 🟡",
+      "explanation": "Models frequently insert abstract legitimacy tokens ('real', 'genuine', 'authentic', 'truly') as shortcuts to simulate empathy, gravity, or craft without supplying concrete details.",
+      "examples": [
+        "What you are experiencing in this transition is real pain.",
+        "Ground the story's opening scene in something real and specific.",
+        "That isn't just a minor feature; that's real progress."
+      ],
+      "humanized_versions": [
+        "Laying off half the team created severe anxiety across the remaining staff.",
+        "Open the story in a cramped, humid basement apartment on 4th Street.",
+        "Reducing API latency from 400ms to 45ms cuts user drop-off significantly."
+      ]
+    },
+    {
+      "id": "lexical_2026_claudisms",
+      "slop_item": "2026 'Claudisms' / Punchy Tics",
+      "category": "Lexical Tells (Vocabulary Layer)",
+      "confidence_level": "Strong 🟠",
+      "explanation": "Reinforcement learning for high-scoring, quotable, 'punchy' prose in 2025–2026 model generations (notably Claude Opus/Sonnet series) birthed specific stylistic tics emphasizing decisive authority and dramatic framing.",
+      "examples": [
+        "This step in the build script is deliberate and load-bearing.",
+        "It's worth stating plainly: this approach is wrong, full stop.",
+        "These unit tests are earning their keep. That's the unlock."
+      ],
+      "humanized_versions": [
+        "This build step prevents race conditions during deployment.",
+        "This approach fails under high concurrency because locks aren't released.",
+        "These unit tests caught three regression bugs during yesterday's refactor."
+      ]
+    },
+    {
+      "id": "lexical_promotional_brochure_register",
+      "slop_item": "Promotional and Travel Brochure Register",
+      "category": "Lexical Tells (Vocabulary Layer)",
+      "confidence_level": "Strong 🟠",
+      "explanation": "When describing places, organizations, or products, models slide into a breathless tourist-brochure register packed with sensory and prestige adjectives that lack precise factual backing.",
+      "examples": [
+        "Nestled within a breathtaking landscape, the vibrant city boasts a rich cultural heritage.",
+        "This premier facility serves as a bustling hub of thriving art and culinary delight.",
+        "A charming hidden gem, offering a world-class experience for discerning travelers."
+      ],
+      "humanized_versions": [
+        "Located in the valley, the city of 400,000 houses 12 historic museums.",
+        "The facility includes three art galleries and six municipal kitchens.",
+        "The small hotel has ten renovated rooms and a courtyard cafe."
+      ]
+    },
+    {
+      "id": "rhetorical_negative_parallelism",
+      "slop_item": "Negative Parallelism ('Not X, but Y')",
+      "category": "Rhetorical Constructions (Sentence Shape)",
+      "confidence_level": "Strong 🟠",
+      "explanation": "Identified by NousResearch and EQ-Bench as the #1 structural tell in AI text. Models overuse contrastive negations ('It's not X, it's Y') to manufacture false depth, dramatic reveals, or philosophical weight.",
+      "examples": [
+        "This isn't just a software tool; it's a collaborator.",
+        "It's not about working harder; it's about working smarter.",
+        "No fluff. No filler. Just results."
+      ],
+      "humanized_versions": [
+        "This software automatically drafts and pushes pull requests to GitHub.",
+        "Automating routine tests saves engineering time.",
+        "The pipeline reduced build times by 12 minutes."
+      ]
+    },
+    {
+      "id": "rhetorical_arguing_with_no_one",
+      "slop_item": "Arguing with No One / Imaginary Objections",
+      "category": "Rhetorical Constructions (Sentence Shape)",
+      "confidence_level": "Strong 🟠",
+      "explanation": "Models manufacture artificial intellectual authority by refuting naive strawman claims or counter-arguments that no reader actually raised.",
+      "examples": [
+        "Contrary to popular belief, this refactoring wasn't mainly about cost.",
+        "A tempting approach would be to rewrite the entire database, but that misses the point.",
+        "You might think performance is the bottleneck here, but it isn't."
+      ],
+      "humanized_versions": [
+        "We refactored the module to comply with updated GDPR retention requirements.",
+        "Rewriting the database would take six months, so we optimized existing indexes instead.",
+        "Memory consumption, rather than raw CPU usage, caused the server crashes."
+      ]
+    },
+    {
+      "id": "rhetorical_forced_triads",
+      "slop_item": "Forced Triads and Rule of Three",
+      "category": "Rhetorical Constructions (Sentence Shape)",
+      "confidence_level": "Strong 🟠",
+      "explanation": "RLHF rewards structured symmetry, causing LLMs to obsessively group adjectives, clauses, bullet points, and examples into exact sets of three, often padding with meaningless synonyms to complete the trio.",
+      "examples": [
+        "Our platform is innovative, transformative, and groundbreaking.",
+        "The system improves efficiency, enhances collaboration, and fosters alignment.",
+        "We must plan carefully, execute flawlessly, and adapt continuously."
+      ],
+      "humanized_versions": [
+        "Our platform speeds up data processing by 30%.",
+        "The system reduces manual data entry and cuts cross-team email traffic.",
+        "We need to test memory limits before releasing to production."
+      ]
+    },
+    {
+      "id": "rhetorical_asyndeton_conjunction_free_lists",
+      "slop_item": "Asyndeton / Conjunction-Free Staccato Lists",
+      "category": "Rhetorical Constructions (Sentence Shape)",
+      "confidence_level": "Strong 🟠",
+      "explanation": "Models systematically drop conjunctions ('and', 'or') between items or format adjectives as isolated period-separated words ('Clean. Simple. Effective.') to sound punchy and decisive without earning dramatic tension.",
+      "examples": [
+        "Fast, reliable, affordable.",
+        "Plan. Build. Ship.",
+        "The data was messy, the deadline was close, the team was tired."
+      ],
+      "humanized_versions": [
+        "Fast and reliable.",
+        "Plan the sprint, build the feature, and ship to staging.",
+        "The team worked late to clean the messy dataset before the Friday deadline."
+      ]
+    },
+    {
+      "id": "rhetorical_significance_inflation",
+      "slop_item": "Significance Inflation",
+      "category": "Rhetorical Constructions (Sentence Shape)",
+      "confidence_level": "Strong 🟠",
+      "explanation": "Wikipedia's most frequently flagged AI pattern. Models puff mundane historical, local, or routine technical facts into grand historical milestones, pivotal turning points, or enduring legacies.",
+      "examples": [
+        "The opening of the new footbridge marked a pivotal moment in the town's history.",
+        "This small library update plays a vital role in shaping the future of computing.",
+        "Leaving an indelible mark, her work stands as a landmark achievement."
+      ],
+      "humanized_versions": [
+        "The new footbridge connected the residential ward directly to the train station.",
+        "This library update fixes a memory leak in the HTTP client.",
+        "Her research paper introduced a faster matrix multiplication algorithm."
+      ]
+    },
+    {
+      "id": "rhetorical_shallow_ing_riders",
+      "slop_item": "Shallow Trailing -ing Riders",
+      "category": "Rhetorical Constructions (Sentence Shape)",
+      "confidence_level": "Strong 🟠",
+      "explanation": "Supported by CMU's PNAS study on participial clauses (showing LLMs write -ing clauses at 2–5x human rates). Models tack trailing participles ('symbolizing...', 'underscoring...', 'highlighting...') onto factual sentences to inject unearned analysis.",
+      "examples": [
+        "The facility opened in 1998, symbolizing the city's economic growth and reflecting its commitment to innovation.",
+        "The server migration completed on schedule, highlighting the team's dedication.",
+        "We added input validation, ensuring higher reliability and demonstrating security awareness."
+      ],
+      "humanized_versions": [
+        "The facility opened in 1998 and created 200 manufacturing jobs.",
+        "The server migration completed on schedule without downtime.",
+        "We added input validation to block SQL injection attempts."
+      ]
+    },
+    {
+      "id": "rhetorical_despite_challenges_thrive",
+      "slop_item": "The 'Despite Challenges... Continues to Thrive' Formula",
+      "category": "Rhetorical Constructions (Sentence Shape)",
+      "confidence_level": "Strong 🟠",
+      "explanation": "A boilerplate structural resolution formula where the model briefly acknowledges an obstacle in a subordinate clause only to immediately reassert generic optimism and resilience.",
+      "examples": [
+        "Despite facing significant challenges such as budget cuts, the department continues to thrive.",
+        "Although obstacles remain, the project's future looks bright.",
+        "In spite of economic uncertainty, the market continues to demonstrate resilience."
+      ],
+      "humanized_versions": [
+        "Budget cuts reduced department staff from twelve to eight, forcing the team to drop two non-core projects.",
+        "Supply chain delays pushed the production date to November.",
+        "Consumer spending fell 3% this quarter, though online subscription sales held steady."
+      ]
+    },
+    {
+      "id": "rhetorical_vague_attribution",
+      "slop_item": "Vague Attribution and Borrowed Authority",
+      "category": "Rhetorical Constructions (Sentence Shape)",
+      "confidence_level": "Strong 🟠",
+      "explanation": "Models invoke anonymous authority figures ('experts believe', 'studies show', 'industry observers note') to lend unearned credibility to generic assertions.",
+      "examples": [
+        "Experts believe that artificial intelligence will transform software architecture.",
+        "Studies show that clear documentation leads to better team outcomes.",
+        "Industry observers note that market adoption is accelerating rapidly."
+      ],
+      "humanized_versions": [
+        "A 2024 Gartner survey reported that 60% of CTOs plan to adopt automated code review tools.",
+        "A study by DORA showed that teams with up-to-date documentation ship code 20% faster.",
+        "AWS reported a 35% year-over-year increase in cloud container deployments."
+      ]
+    },
+    {
+      "id": "rhetorical_aphoristic_dramatic_closers",
+      "slop_item": "Aphoristic Closers and One-Line Drama",
+      "category": "Rhetorical Constructions (Sentence Shape)",
+      "confidence_level": "Strong 🟠",
+      "explanation": "Paragraphs or sections frequently end with dramatic, punchline-style aphorisms or isolated single-sentence fragments designed to create an artificial sense of profound insight.",
+      "examples": [
+        "And that changes everything.",
+        "At its core, clarity is kindness.",
+        "No shouting. No comeback. Just silence."
+      ],
+      "humanized_versions": [
+        "This change reduces manual error logging time.",
+        "Clear documentation saves developers time during onboarding.",
+        "Neither party responded to the press inquiry."
+      ]
+    },
+    {
+      "id": "rhetorical_unearned_staccato",
+      "slop_item": "Unearned Staccato and Metronome Rhythm",
+      "category": "Rhetorical Constructions (Sentence Shape)",
+      "confidence_level": "Weak alone / Strong in cluster 🟡",
+      "explanation": "LLMs output strings of consecutive short, flat declarative sentences (staccato) or uniform 15–25 word sentences (metronome rhythm). Real human prose varies naturally between 4-word bursts and 35-word complex sentences.",
+      "examples": [
+        "Open the file. Check the date. Save it. Move on.",
+        "Set a 5-minute timer. Tidy your immediate space. Stop when it rings.",
+        "The project started in June. The team worked hard every day. We finished on time."
+      ],
+      "humanized_versions": [
+        "Open the file, verify the modification date, and save your changes before proceeding.",
+        "Set a 5-minute timer and tidy only your workspace; when the timer rings, stop and begin your work.",
+        "After starting in June, the engineering team worked through several architectural revisions to ship on schedule."
+      ]
+    },
+    {
+      "id": "rhetorical_relativizer_omission",
+      "slop_item": "Dropped Connecting Words (Relativizer and Complementizer Omission)",
+      "category": "Rhetorical Constructions (Sentence Shape)",
+      "confidence_level": "Strong 🟠 (user-flagged rule, added 2026-09-29)",
+      "explanation": "Linguists call a relative clause with its connecting word removed a 'zero relative clause' or 'contact clause' ('the power you don't use' instead of 'the power that you don't use'). The same clipping happens after reporting and thinking verbs, known as complementizer omission ('Anthropic said the model is faster' instead of 'Anthropic said that the model is faster'). Models strip these small connecting words to sound punchy and compressed, and the result reads clipped and telegraphic. RULE: restore the connecting word (that, which, who, whom, where, when, why) wherever a noun is directly followed by a pronoun or noun + verb that describes it, and restore 'that' after verbs like said, found, showed, means, think, know, realize, and argue. The user wants these words present by default; drop one only in fixed everyday expressions where adding it would sound stiff (for example 'the way I see it').",
+      "examples": [
+        "You'll stop paying for power you don't use.",
+        "Pick the tool you actually need for the job.",
+        "The report she sent on Monday had three errors.",
+        "That's the reason it failed in production.",
+        "The day we launched, the server went down.",
+        "The city I grew up in has changed.",
+        "The client I emailed never replied.",
+        "Artificial Analysis found Sonnet used 60% more tokens.",
+        "I think the cheaper model is enough for most tasks.",
+        "This means you pay more at Max effort."
+      ],
+      "humanized_versions": [
+        "You'll stop paying for power that you don't use.",
+        "Pick the tool that you actually need for the job.",
+        "The report that she sent on Monday had three errors.",
+        "That's the reason why it failed in production.",
+        "On the day when we launched, the server went down.",
+        "The city where I grew up has changed.",
+        "The client whom I emailed never replied. (Or, less formally: the client that I emailed.)",
+        "Artificial Analysis found that Sonnet used 60% more tokens.",
+        "I think that the cheaper model is enough for most tasks.",
+        "This means that you pay more at Max effort."
+      ]
+    },
+    {
+      "id": "structure_missing_transitional_phrases",
+      "slop_item": "Abrupt Sentence Joins (Missing Transitional Phrases / Discourse Markers)",
+      "category": "Structure and Formatting Tells",
+      "confidence_level": "Strong 🟠 (user-flagged rule, added 2026-09-29)",
+      "explanation": "Linguists call the words that signal how one sentence relates to the next 'discourse markers' or 'cohesive devices'. When they're missing, each sentence starts cold and the reader has to work out whether it's a cause, a consequence, a contrast, or an example. The text feels abrupt and list-like, which is a side effect of models avoiding the banned filler transitions. RULE: when one sentence is a consequence, contrast, example, restatement, or next step of the previous one, open it with a short plain-English marker that names that relationship. Use: so, therefore, accordingly, as a result, because of this, that's why, which means, in other words, by contrast, on the other hand, even so, still, however, for example, for instance, in practice, after that, then, meanwhile, at the same time, in the same way, on top of that. Don't use the humanizer blacklist (Additionally, Furthermore, Moreover, Notably, Importantly, Ultimately, In conclusion, It is worth noting that). These say nothing about the logic and remain banned. Don't put a marker on every sentence either; add one where the jump feels abrupt, roughly every two to four sentences in explanatory prose.",
+      "examples": [
+        "Sonnet 5.5 is half the price per token. At Max effort it costs more per task than Opus 5.5.",
+        "Medium is the default in the Claude app. You're already on the cheaper setting.",
+        "The model reasons for longer at higher effort. You pay for more tokens.",
+        "Opus 5.5 leads on coding benchmarks. On knowledge work the scores are almost identical.",
+        "Some tasks have a clear finish line. A one-page summary of a report is one.",
+        "Run the task on Sonnet at High effort. Compare the result with Opus."
+      ],
+      "humanized_versions": [
+        "Sonnet 5.5 is half the price per token. Even so, at Max effort it costs more per task than Opus 5.5.",
+        "Medium is the default in the Claude app, so you're already on the cheaper setting.",
+        "The model reasons for longer at higher effort. As a result, you pay for more tokens.",
+        "Opus 5.5 leads on coding benchmarks. On knowledge work, by contrast, the scores are almost identical.",
+        "Some tasks have a clear finish line. For example, a one-page summary of a report has an obvious end point.",
+        "Run the task on Sonnet at High effort. After that, compare the result with Opus."
+      ]
+    },
+    {
+      "id": "rhetorical_categorical_observation",
+      "slop_item": "Categorical Observation ('Particular Way' Pattern)",
+      "category": "Rhetorical Constructions (Sentence Shape)",
+      "confidence_level": "Strong 🟠",
+      "explanation": "In creative writing, models substitute abstract category labels for actual physical descriptions using precision-qualifier traps like 'the particular way of a person who' or 'the specific kind of silence'.",
+      "examples": [
+        "She stood motionless in the particular way of a person who has already decided.",
+        "He smiled with the specific kind of tired confidence typical of veteran pilots.",
+        "There was a certain quiet stillness in the room."
+      ],
+      "humanized_versions": [
+        "She sat without fidgeting, hands flat on her knees.",
+        "He unbuttoned his flight jacket and leaned back against the counter without speaking.",
+        "Nobody in the room moved or looked up from their desks."
+      ]
+    },
+    {
+      "id": "rhetorical_self_posed_questions",
+      "slop_item": "Self-Posed Rhetorical Q&A",
+      "category": "Rhetorical Constructions (Sentence Shape)",
+      "confidence_level": "Strong 🟠",
+      "explanation": "The writer asks a dramatic rhetorical question that nobody asked and answers it immediately with a short, punchy fragment.",
+      "examples": [
+        "The result? Devastating.",
+        "The catch? There isn't one.",
+        "Why does this matter? Because timing is everything."
+      ],
+      "humanized_versions": [
+        "The outage wiped out two hours of uncommitted transaction logs.",
+        "The tier is completely free with no usage caps.",
+        "Early deployment matters because regulatory deadlines take effect in Q4."
+      ]
+    },
+    {
+      "id": "structure_bold_label_bullets",
+      "slop_item": "Bold-Label Bullets",
+      "category": "Structure and Formatting Tells",
+      "confidence_level": "Strong 🟠",
+      "explanation": "Virtually non-existent in human encyclopedic prose, but ubiquitous in LLM outputs. Every bullet point starts with a bolded header word that is immediately rephrased or repeated in the main sentence text.",
+      "examples": [
+        "- **Scalability:** The architecture is designed to scale effortlessly.",
+        "- **Performance:** Performance improvements were observed across all tests.",
+        "- **Security:** Ensures robust security standards are maintained."
+      ],
+      "humanized_versions": [
+        "- The architecture scales automatically by spinning up container replicas.",
+        "- Database queries executed 25% faster during stress testing.",
+        "- All user sessions require OAuth2 multi-factor authentication."
+      ]
+    },
+    {
+      "id": "structure_formulaic_headers_symmetry",
+      "slop_item": "Formulaic Headers and Visual Symmetry",
+      "category": "Structure and Formatting Tells",
+      "confidence_level": "Strong 🟠",
+      "explanation": "LLMs impose rigid structural symmetry across documents: Title Case on every header, emoji icons on headings, equal paragraph lengths, and standard section titles ('Challenges and Future Prospects', 'Key Takeaways', 'Conclusion').",
+      "examples": [
+        "## 🚀 Launch Phase & Key Takeaways",
+        "## Challenges and Future Prospects",
+        "### Conclusion\nIn conclusion, as we look to the future..."
+      ],
+      "humanized_versions": [
+        "## Deployment Schedule",
+        "## Production Bottlenecks",
+        "## Next Steps\nShip the v1.2 patch by Tuesday morning."
+      ]
+    },
+    {
+      "id": "structure_topic_sentence_machine",
+      "slop_item": "The Topic-Sentence Machine",
+      "category": "Structure and Formatting Tells",
+      "confidence_level": "Strong 🟠",
+      "explanation": "Every single paragraph follows an identical, predictable formula: clear topic sentence -> elaboration -> specific example -> concluding wrap-up sentence. Human writing varies paragraph structure, starting mid-thought or ending on a detail.",
+      "examples": [
+        "Security is a vital aspect of modern cloud engineering. Without adequate security, systems are vulnerable to attacks. For instance, unencrypted S3 buckets lead to data leaks. Therefore, prioritizing security ensures long-term safety.",
+        "Caching improves application performance significantly. By storing frequent queries in memory, databases handle less load. Redis is a common example of this strategy. Ultimately, caching creates a smoother user experience."
+      ],
+      "humanized_versions": [
+        "Unencrypted S3 buckets accounted for three major client data leaks last quarter. Encrypting bucket storage at rest eliminates this vulnerability.",
+        "Storing frequent query results in a Redis cache dropped database CPU load from 88% down to 14% during peak hours."
+      ]
+    },
+    {
+      "id": "structure_punctuation_poverty_emoji",
+      "slop_item": "Punctuation Poverty and Structural Emoji Abuse",
+      "category": "Structure and Formatting Tells",
+      "confidence_level": "Strong 🟠",
+      "explanation": "LLMs strip natural punctuation texture (avoiding semicolons, parentheses, and expressive punctuation) while using emojis as structural bullet points, section dividers, or decorative line closers.",
+      "examples": [
+        "✨ Explore our breathtaking platform ✨\n🚀 Feature 1: Fast data processing\n✅ Feature 2: Enterprise security",
+        "The report was clear. The team acted quickly. The results were positive.",
+        "Welcome to our new app! 💡 Let's get started!"
+      ],
+      "humanized_versions": [
+        "Platform Features:\n- 10Gbps data ingestion\n- SOC2 Type II compliance",
+        "The report was clear; the team acted immediately, cutting resolution time in half.",
+        "Welcome to the platform. Follow the quickstart guide below to configure your API keys."
+      ]
+    },
+    {
+      "id": "info_swap_test_genericness",
+      "slop_item": "The Swap Test (Generic Specificity)",
+      "category": "Information-Level Tells",
+      "confidence_level": "Strong 🟠",
+      "explanation": "Paragraphs contain high stylistic polish but zero ground-level specificity. A description written for one subject can be swapped with another without changing a word because no concrete facts are asserted.",
+      "examples": [
+        "This historic city offers a unique blend of tradition and modernity that captivates visitors from around the globe.",
+        "Our company delivers innovative solutions tailored to meet the dynamic needs of modern clients.",
+        "This revolutionary framework provides a seamless experience for software developers."
+      ],
+      "humanized_versions": [
+        "Kyoto's downtown grid places 1,200-year-old wooden temples directly alongside ten-story glass office complexes.",
+        "We build custom inventory tracking software for regional automotive parts suppliers.",
+        "This Python library wraps complex REST API calls into three simple asynchronous functions."
+      ]
+    },
+    {
+      "id": "info_low_density_high_polish",
+      "slop_item": "Low Density, High Polish",
+      "category": "Information-Level Tells",
+      "confidence_level": "Strong 🟠",
+      "explanation": "Text is syntactically flawless and grammatically complex, yet contains almost zero information density or claim-level substance. It creates the illusion of deep analysis while asserting nothing verifiable.",
+      "examples": [
+        "By leveraging holistic paradigms and fostering strategic alignment, organizations can navigate complex operational domains effectively.",
+        "It is essential to thoughtfully consider multifaceted perspectives when evaluating strategic growth trajectories.",
+        "Optimizing internal processes requires a comprehensive understanding of underlying operational dynamics."
+      ],
+      "humanized_versions": [
+        "Aligning sales and engineering teams around quarterly targets reduced feature delivery delays.",
+        "Before expanding into European markets, calculate local VAT tax compliance costs.",
+        "To speed up order fulfillment, move top-selling items to shelves near the loading dock."
+      ]
+    },
+    {
+      "id": "info_relevance_drift_absent_subjectivity",
+      "slop_item": "Relevance Drift and Absent Subjectivity",
+      "category": "Information-Level Tells",
+      "confidence_level": "Strong 🟠",
+      "explanation": "The AI answers adjacent to a specific query (offering generic background rather than direct tactical advice) and removes all personal friction, lived experience, mistakes, or honest uncertainty.",
+      "examples": [
+        "When asked how to debug a C memory leak, the AI explains the general history and importance of memory management.",
+        "A product review that balances pros and cons generically without expressing a single clear personal opinion.",
+        "A postmortem essay stating 'users may find that updates require attention' instead of 'I broke staging for two hours on Tuesday.'"
+      ],
+      "humanized_versions": [
+        "Run `valgrind --leak-check=full ./bin/app` to pinpoint the exact line where `malloc` was allocated without `free`.",
+        "The noise-canceling on these headphones blocks subway engine roar effectively, but the earcups pinch after two hours.",
+        "I broke the staging environment for two hours on Tuesday because I forgot to run database migration scripts first."
+      ]
+    },
+    {
+      "id": "info_confident_fabrication",
+      "slop_item": "Confident Fabrication and Hallucinated Metrics",
+      "category": "Information-Level Tells",
+      "confidence_level": "Smoking gun 🔴",
+      "explanation": "Models generate authoritative-sounding numbers, unverified metrics ('reduces load times by 40%'), fake quotes, or non-existent historical details to satisfy user prompts without factual grounding.",
+      "examples": [
+        "Our proprietary algorithm improves data retrieval speed by exactly 40% across all enterprise applications.",
+        "As Albert Einstein famously wrote in a 1932 letter: 'Digital symmetry is the foundation of peace.'",
+        "In 2018, the Supreme Court ruled 7-2 in Smith v. Cloud Systems that API endpoints are non-patentable."
+      ],
+      "humanized_versions": [
+        "Internal benchmarks on our test database showed query times dropped from 120ms to 85ms (a ~29% improvement).",
+        "As Einstein noted in his 1931 essay 'The World As I See It': 'The most beautiful experience we can have is the mysterious.'",
+        "In 2021, the Supreme Court ruled 6-2 in Google LLC v. Oracle America, Inc. that Google's copy of Java API declarations was fair use."
+      ]
+    },
+    {
+      "id": "genre_fiction_cliches_reactions",
+      "slop_item": "Fiction Body Reactions and Naming Tropes",
+      "category": "Genre-Specific Fingerprints",
+      "confidence_level": "Smoking gun 🔴 (when clustered)",
+      "explanation": "Creative writing models over-index on stock character names ('Elara', 'Kael', 'Seraphina') and repetitive physical sensory clichés ('shivers down her spine', 'breath hitched', 'heart hammered against his ribs').",
+      "examples": [
+        "Elara let out a breath she didn't know she was holding as Kael's gaze met hers.",
+        "A shiver ran down her spine while his heart hammered violently against his ribs.",
+        "Eyes glinting with mischief, a smirk played on his lips as he whispered barely above a whisper."
+      ],
+      "humanized_versions": [
+        "Elena exhaled slowly, watching Kael across the table.",
+        "Her hands shook as he stepped into the light.",
+        "He grinned and leaned across the desk."
+      ]
+    },
+    {
+      "id": "genre_poetic_slop_forced_rhymes",
+      "slop_item": "Poetic Slop and Abstract Rhymes",
+      "category": "Genre-Specific Fingerprints",
+      "confidence_level": "Strong 🟠",
+      "explanation": "Poetry prompts trigger default AABB/ABAB rhyming quatrains with forced syntax, heavy overuse of 'echo/whisper/tapestry', and abstract nature metaphors that tie neatly into optimistic couplets.",
+      "examples": [
+        "In whispering winds the shadows dance,\nAcross the tapestry of chance.\nA symphony of silent grace,\nWhere time leaves no enduring trace.",
+        "Through valleys deep and mountains high,\nOur hopeful hearts begin to fly."
+      ],
+      "humanized_versions": [
+        "The wind cut across the damp asphalt outside the gas station.\nYellow fluorescent light flickered against the wet pavement.",
+        "We sat on the hood of the truck until four in the morning."
+      ]
+    },
+    {
+      "id": "genre_linkedin_broetry_hooks",
+      "slop_item": "LinkedIn Broetry and Engagement Hooks",
+      "category": "Genre-Specific Fingerprints",
+      "confidence_level": "Strong 🟠",
+      "explanation": "Pangram's 2026 study found 40% of long LinkedIn posts were AI-written. They rely on dramatic single-line spacing, manufactured failure-to-success hooks, 'Not X, but Y' reveals, and canned engagement questions.",
+      "examples": [
+        "I got fired today.\n\nNobody talks about this.\n\nNo shouting. No comeback. Just silence.\n\nThe turning point wasn't losing the job. It was finding myself.\n\nLet that sink in.\n\nAgree? 👇",
+        "Most people don't realize this about leadership.\n\nRead that again."
+      ],
+      "humanized_versions": [
+        "Our team was laid off this morning during a ten-minute company video call. Here is what happened and what our engineering group is doing next.",
+        "Managing engineers requires clear project priorities rather than daily micromanagement."
+      ]
+    },
+    {
+      "id": "genre_code_commenting_defensive_bloat",
+      "slop_item": "Code Commenting and Defensive Bloat",
+      "category": "Genre-Specific Fingerprints",
+      "confidence_level": "Strong 🟠",
+      "explanation": "AI code generators produce 'kindergarten commenting' (restating basic syntax line-by-line), unnecessary enterprise abstraction layers for trivial tasks, and defensive bloat (nested try-except blocks, redundant null checks).",
+      "examples": [
+        "// Increment the counter by 1\ncounter++;\n// Check if user is null\nif (user != null) { return user.getName(); }",
+        "// 🚀 Initialize app\n// ✅ Validate input\n// Enterprise abstract factory wrapper for a 10-line CSV reader script",
+        "try { try { return readData(); } catch (Exception e) {} } catch (Exception e) {}"
+      ],
+      "humanized_versions": [
+        "counter++;\nreturn user?.getName();",
+        "def read_csv(file_path):\n    with open(file_path) as f:\n        return list(csv.DictReader(f))",
+        "return readData()"
+      ]
+    },
+    {
+      "id": "genre_security_report_boilerplate",
+      "slop_item": "Security Report CWE Boilerplate",
+      "category": "Genre-Specific Fingerprints",
+      "confidence_level": "Strong 🟠",
+      "explanation": "Automated AI vulnerability submissions (which flooded maintainers on curl and PSF) use generic CWE boilerplate, inflated severity scores, and non-functional proof-of-concept code targeting non-existent functions.",
+      "examples": [
+        "CRITICAL VULNERABILITY DETECTED: CWE-120 Buffer Overflow in string_handler(). This allows remote attackers to execute arbitrary code.",
+        "High severity alert: The application suffers from potential memory corruption in process_input().",
+        "Proof of concept exploit attached (targets function that was deprecated in 2019)."
+      ],
+      "humanized_versions": [
+        "Line 142 of src/http.c passes user input directly to sprintf without checking buffer length. Here is a reproducible 3-line payload that crashes the process.",
+        "Memory leak in src/parser.c: malloc on line 88 is not freed when HTTP headers are malformed.",
+        "PoC tested on v2.4.1 showing a crash in the active parser path."
+      ]
+    },
+    {
+      "id": "genre_vibe_coded_ui",
+      "slop_item": "Vibe-Coded UI / Visual Slop",
+      "category": "Genre-Specific Fingerprints",
+      "confidence_level": "Strong 🟠",
+      "explanation": "AI-generated web interfaces heavily default to purple/indigo gradients, glassmorphism cards, glowing borders, ALL-CAPS stat callouts ('10X FASTER'), and emoji inside tinted rounded icon squares.",
+      "examples": [
+        "Indigo gradient background with glowing rounded glassmorphism cards and '🚀 10X FASTER' headers.",
+        "Hero section copy: 'Transform your workflow with AI-powered, next-generation intelligence.'",
+        "Emoji navigation icons inside purple squares: '💡 Insights', '🔒 Security', '⚡ Performance'."
+      ],
+      "humanized_versions": [
+        "Clean dark gray background with high-contrast white text, clear data tables, and subtle borders.",
+        "Hero headline: 'Continuous deployment for Kubernetes clusters.'",
+        "Simple SVG outline icons representing Analytics, Security Settings, and System Logs."
+      ]
+    }
+  ]
+}
